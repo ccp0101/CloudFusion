@@ -200,7 +200,8 @@ class DropboxStore(Store):
             # Make the user sign in and authorize this token
             print "url:", url
             print "Please visit this website and press the 'Allow' button in the next Minute."
-            webbrowser.open(url)
+            # webbrowser.open(url)
+            c = input("Continue?")
             access_token = self.reconnect()
             if not access_token:
                 print "Sorry, please try copying the config file again."
