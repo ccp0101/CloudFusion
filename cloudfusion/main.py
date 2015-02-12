@@ -132,11 +132,12 @@ def main():
                 if not name.startswith('_'):
                     setattr(TransparentConfigurablePyFuseBox, name, profile(fn, filename='/tmp/cloudfusion_profile'))
     fuse_operations = TransparentConfigurablePyFuseBox(mountpoint)
+    allow_other = True
     try:
         #first try to mount file system with big_writes option (more performant)
-        FUSE(fuse_operations, mountpoint, foreground=foreground, nothreads=True, big_writes=True, max_read=131072, max_write=131072) 
+        FUSE(fuse_operations, mountpoint, allow_other=allow_other, foreground=foreground, nothreads=True, big_writes=True, max_read=131072, max_write=131072) 
     except RuntimeError, e:
-        FUSE(fuse_operations, mountpoint, foreground=foreground, nothreads=True)
+        FUSE(fuse_operations, mountpoint, allow_other=allow_other, foreground=foreground, nothreads=True)
     
 if __name__ == '__main__':
     main()
